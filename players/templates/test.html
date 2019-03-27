@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body>
+<form action="/action_page.php">
+      Country ID: <input type="text" name="C_ID" id="C_ID"><br>
+    </form>
+    <button onclick="myFunction()">Search</button>
+    <button onclick="myPostFunction()">TestApi</button>
+    <button onclick="myPostFunctionPlayerTeam()">PlayerTeamApi</button>
+    <button onclick="myPostFunctionStatsTeam()">PlayerStatsApi</button>
+
+<script>
+    function myFunction() {
+             var input = document.getElementById("C_ID").value
+             var appData = {
+                'id': input
+            };
+
+            $.ajax({
+                type: "GET",
+                //headers: {  'Access-Control-Allow-Origin': 'http://127.0.0.1:8000/world/world/' },
+                //url: "http://127.0.0.1:8000/players/1?format=json",
+                //data: JSON.stringify(appData),
+                //data: {"name":input},
+                url: "http://142.93.44.141/players/1?format=json",
+             }).done(function (data) {
+                 alert(data.name);
+             }).fail(function (data) {
+                    alert("Did not work");
+             });
+        }
+
+    function myPostFunction() {
+        //var Home_Team = document.getElementById("Home_Team").value
+        //var Away_Team = document.getElementById("Away_Team").value
+        //var Referee = document.getElementById("Referee").value
+        //var Date = document.getElementById("Date").value
+        //var Time = document.getElementById("Time").value
+        //var Location = document.getElementById("Location").value
+
+        var Home_Team = "Thomas Davis"
+        var Away_Team = "Ballymun"
+        var Referee = "Conor"
+        var Date = "2019-05-22"
+        var Time = "12:30"
+        var Location = "nnnnnnn road"
+
+            var appData = {
+            'Home_Team': Home_Team,
+            'Away_Team': Away_Team,
+            'Referee': Referee,
+                'Date': Date,
+            'Time': Time,
+            'Location': Location
+
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "http://127.0.0.1:8000/fixtures/",
+            data: JSON.stringify(appData),
+            contentType: "application/json",
+            error: function(e) {
+                alert(e);
+              },
+            dataType: "json",
+            contentType: "application/json"
+        });
+    }
+
+     function myPostFunctionPlayerTeam() {
+        //var Home_Team = document.getElementById("Home_Team").value
+        //var Away_Team = document.getElementById("Away_Team").value
+        //var Referee = document.getElementById("Referee").value
+        //var Date = document.getElementById("Date").value
+        //var Time = document.getElementById("Time").value
+        //var Location = document.getElementById("Location").value
+
+        var name = "Adam"
+        var DOB = "23/11/1998"
+        var TeamID = 1
+
+            var appData = {
+            'name': name,
+            'DOB': DOB,
+            'TeamID': TeamID
+
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "http://127.0.0.1:8000/players/",
+            data: JSON.stringify(appData),
+            contentType: "application/json",
+            error: function(e) {
+                alert(e);
+              },
+            dataType: "json",
+            contentType: "application/json"
+        });
+    }
+
+    function myPostFunctionStatsTeam() {
+        var PlayerID = 19
+        var Fixtures = 3
+        var Pass = 6
+        var Pass_Miss = 4
+        var Point = 5
+        var Point_Miss = 2
+        var Goal = 2
+        var Goal_Miss = 1
+        var Turnover = 6
+        var Lost_Possession = 2
+        var Block = 4
+        var Kickout_won = 0
+        var Kickout_lost = 0
+        var Goal_save = 0
+        var Goal_conceded = 0
+        var Yellow_card = 1
+        var Red_card = 0
+        var Black_card = 0
+
+            var appData = {
+            'Player_ID':PlayerID,
+        'Fixture_ID':Fixtures,
+        'Pass':Pass,
+        'Pass_Miss':Pass_Miss,
+        'Point':Point,
+        'Point_Miss':Point_Miss,
+        'Goal':Goal,
+        'Goal_Miss':Goal_Miss,
+        'Turnover': Turnover,
+                'Dispossessed': Lost_Possession,
+                'Block': Block,
+                'Kickout_won': Kickout_won,
+                'Kickout_lost': Kickout_lost,
+                'Goal_save':Goal_save,
+        'Goal_conceded':Goal_conceded,
+                 'Yellow_card':Yellow_card,
+        'Red_card':Red_card,
+        'Black_card':Black_card
+
+
+
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "http://127.0.0.1:8000/stats/",
+            data: JSON.stringify(appData),
+            contentType: "application/json",
+            error: function(e) {
+                alert(e);
+              },
+            dataType: "json",
+            contentType: "application/json"
+        });
+    }
+</script>
+</body>
+</html>

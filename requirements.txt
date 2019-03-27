@@ -1,0 +1,8 @@
+Django==2.1.2
+django-cors-headers==2.4.0
+django-leaflet==0.24.0
+djangorestframework==3.9.0
+djangorestframework-gis==0.13
+psycopg2==2.7.5
+requests==2.20.0
+pygments
